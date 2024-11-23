@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <title>Songs Homepage - Welcome to My Music Store</title>
+    <style>
+        body {
+            width: 100%;
+            margin: auto;
+        }
+
+        ul {
+            list-style-type: none;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <h1>Welcome to My Music Store</h1>
+</header>
+<main>
+    <h2>Choose a song:</h2>
+    <form th:action="@{'/submit'}" th:method="POST">
+        <ul>
+            <li th:each="song : ${songs}">
+                <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:id="${song.getId()}" required>
+                <label th:for="${song.getId()}" th:text="'Name: ' + ${song.getTitle()}
+                + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' +
+                ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">
+                </label>
+                <div style="display: inline;">
+                    <button type="submit" th:formaction="@{'/edit-form/{id}' (id=${song.getId()})}" th:formmethod="GET">Edit Song</button>
+                    <button type="submit" th:formaction="@{'/delete/{id}' (id=${song.getId()})}" th:formmethod="POST">Delete Song</button>
+                </div>
+            </li>
+        </ul>
+        <button type="submit">Submit</button>
+    </form>
+    <a th:href="@{'/add-form'}" style="margin-top: 5px"><button>Add Song</button></a>
+</main>
+</body>
+</html>
