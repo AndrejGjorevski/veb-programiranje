@@ -6,12 +6,72 @@
     <title>Songs Homepage - Welcome to My Music Store</title>
     <style>
         body {
-            width: 100%;
-            margin: auto;
+            font-family: Arial, sans-serif;
+            background-color: lightslategrey;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #36454F;
+        }
+
+        h1 {
+            margin: 0;
+        }
+
+        #container {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            color: #36454F;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
         }
 
         ul {
-            list-style-type: none;
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #F7F7F7;
+            border: 1px solid #DDD;
+            border-radius: 4px;
+        }
+
+        label {
+            display: inline-block;
+            margin-right: 10px;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #36454F;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #2C3E50;
+        }
+
+        a button {
+            margin-top: 10px;
+            display: block;
         }
     </style>
 </head>
@@ -19,25 +79,28 @@
 <header>
     <h1>Welcome to My Music Store</h1>
 </header>
-<main>
-    <h2>Choose a song:</h2>
-    <form th:action="@{'/submit'}" th:method="POST">
-        <ul>
-            <li th:each="song : ${songs}">
-                <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:id="${song.getId()}" required>
-                <label th:for="${song.getId()}" th:text="'Name: ' + ${song.getTitle()}
+<div id="container">
+    <main>
+        <h2>Choose a song:</h2>
+        <form th:action="@{'/submit'}" th:method="POST">
+            <ul>
+                <li th:each="song : ${songs}">
+                    <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:id="${song.getId()}" required>
+                    <label th:for="${song.getId()}" th:text="'Name: ' + ${song.getTitle()}
                 + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' +
                 ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">
-                </label>
-                <div style="display: inline;">
-                    <button type="submit" th:formaction="@{'/edit-form/{id}' (id=${song.getId()})}" th:formmethod="GET">Edit Song</button>
-                    <button type="submit" th:formaction="@{'/delete/{id}' (id=${song.getId()})}" th:formmethod="POST">Delete Song</button>
-                </div>
-            </li>
-        </ul>
-        <button type="submit">Submit</button>
-    </form>
-    <a th:href="@{'/add-form'}" style="margin-top: 5px"><button>Add Song</button></a>
-</main>
+                    </label>
+                    <div style="display: inline;">
+                        <button type="submit" th:formaction="@{'/edit-form/{id}' (id=${song.getId()})}" th:formmethod="GET">Edit Song</button>
+                        <button type="submit" th:formaction="@{'/delete/{id}' (id=${song.getId()})}" th:formmethod="POST">Delete Song</button>
+                    </div>
+                </li>
+            </ul>
+            <button type="submit">Submit</button>
+        </form>
+        <a th:href="@{'/add-form'}" style="margin-top: 5px"><button>Add Song</button></a>
+    </main>
+</div>
+
 </body>
 </html>

@@ -17,11 +17,11 @@ public class SongRepository {
 
     public SongRepository(AlbumRepository albumRepository) {
         songs = new ArrayList<>();
-        songs.add(new Song("1", "Purple Haze", "Rock", 1967, new ArrayList<>(), albumRepository.albums.get(0)));
-        songs.add(new Song("2", "Starman", "Rock", 1972, new ArrayList<>(), albumRepository.albums.get(1)));
-        songs.add(new Song("3", "Sultans of Swing", "Rock", 1978, new ArrayList<>(), albumRepository.albums.get(2)));
-        songs.add(new Song("4", "Someday", "Rock", 2001, new ArrayList<>(), albumRepository.albums.get(3)));
-        songs.add(new Song("5", "Purple Rain", "Pop", 1984, new ArrayList<>(), albumRepository.albums.get(4)));
+        songs.add(new Song("1", "Feedbacker I-V", "Stoner Rock", 2003, new ArrayList<>(), albumRepository.albums.get(0)));
+        songs.add(new Song("2", "Cherry-coloured Funk", "Dreampop", 1990, new ArrayList<>(), albumRepository.albums.get(1)));
+        songs.add(new Song("3", "I'm Waiting For The Man", "Rock", 1967, new ArrayList<>(), albumRepository.albums.get(2)));
+        songs.add(new Song("4", "sometimes", "Shoegaze", 1991, new ArrayList<>(), albumRepository.albums.get(3)));
+        songs.add(new Song("5", "Jazz(We've Got It)", "Rap", 1991, new ArrayList<>(), albumRepository.albums.get(4)));
     }
 
     public List<Song> findAll() {

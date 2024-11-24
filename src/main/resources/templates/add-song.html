@@ -1,36 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: lightslategrey;
+      color: #FFFFFF;
+      margin: 0;
+      padding: 0;
+    }
+
+    #form-container {
+      width: 60%;
+      margin: 40px auto;
+      padding: 20px;
+      background-color: #FFFFFF;
+      color: #36454F;
+      border-radius: 8px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
+    }
+
+    label {
+      font-weight: bold;
+    }
+
+    input, select, button {
+      padding: 8px;
+      font-size: 14px;
+      border: 1px solid #DDD;
+      border-radius: 4px;
+      width: 100%;
+      box-sizing: border-box;
+    }
+
+    button {
+      background-color: #36454F;
+      color: #FFFFFF;
+      cursor: pointer;
+      transition: background-color 0.2s ease;
+    }
+
+    button:hover {
+      background-color: #2C3E50;
+    }
+  </style>
 </head>
 <body>
-<form th:action="${song != null ? '/edit/' + song.getId() : '/add'}" th:method="POST">
-  <!-- Hidden input for Song ID (used for edit mode) -->
-  <input type="hidden" name="songId" th:value="${song != null ? song.getId() : ''}">
+<div id="form-container">
+  <form th:action="${song != null ? '/edit/' + song.getId() : '/add'}" th:method="POST">
+    <!-- Hidden input for Song ID (used for edit mode) -->
+    <input type="hidden" name="songId" th:value="${song != null ? song.getId() : ''}">
 
-  <label for="title">Song Title:</label>
-  <input type="text" id="title" name="title" th:value="${song != null ? song.getTitle() : ''}" required>
+    <label for="title">Song Title:</label>
+    <input type="text" id="title" name="title" th:value="${song != null ? song.getTitle() : ''}" required>
 
-  <label for="trackId">Track ID:</label>
-  <input type="text" id="trackId" name="trackId" th:value="${song != null ? song.getTrackId() : ''}" required>
+    <label for="trackId">Track ID:</label>
+    <input type="text" id="trackId" name="trackId" th:value="${song != null ? song.getTrackId() : ''}" required>
 
-  <label for="genre">Genre:</label>
-  <input type="text" id="genre" name="genre" th:value="${song != null ? song.getGenre() : ''}" required>
+    <label for="genre">Genre:</label>
+    <input type="text" id="genre" name="genre" th:value="${song != null ? song.getGenre() : ''}" required>
 
-  <label for="releaseYear">Release Year:</label>
-  <input type="number" id="releaseYear" name="releaseYear" th:value="${song != null ? song.getReleaseYear() : ''}" required>
+    <label for="releaseYear">Release Year:</label>
+    <input type="number" id="releaseYear" name="releaseYear" th:value="${song != null ? song.getReleaseYear() : ''}" required>
 
-  <label for="albumId">Album:</label>
-  <select id="albumId" name="albumId" required>
-    <option th:each="album : ${albums}"
-            th:value="${album.getId()}"
-            th:selected="${song == null or song.album == null or album.id == song.album.id}"
-            th:text="${album.getName()}">
-    </option>
-  </select>
+    <label for="albumId">Album:</label>
+    <select id="albumId" name="albumId" required>
+      <option th:each="album : ${albums}"
+              th:value="${album.getId()}"
+              th:selected="${song == null or song.album == null or album.id == song.album.id}"
+              th:text="${album.getName()}">
+      </option>
+    </select>
 
-  <button type="submit">Save Song</button>
-</form>
+    <button type="submit">Save Song</button>
+  </form>
+</div>
+
 </body>
 </html>

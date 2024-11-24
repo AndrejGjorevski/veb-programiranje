@@ -3,27 +3,111 @@
 <head>
     <meta charset="utf-8">
     <title>Add new Performer to Song</title>
-    <style type = "text/css">
+    <style>
         body {
-            width: 800px;
-            margin: auto;
+            font-family: Arial, sans-serif;
+            background-color: lightslategrey;
+            color: #FFFFFF;
+            margin: 0;
+            padding: 0;
         }
-        table {
-            width:100%;
+
+        header {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #36454F;
         }
-        table, td, th {
-            border: 1px solid black;
-            padding:3px 2px;
+
+        h1 {
+            margin: 0;
         }
-        section {
-            float: left;
-            margin: 0 1.5%;
-            width: 63%;
+
+        #container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            gap: 20px;
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            background-color: #FFFFFF;
+            color: #36454F;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
+
+        section, aside {
+            flex: 1;
+            max-width: 60%;
+            padding: 20px;
+            background-color: #F7F7F7;
+            color: #36454F;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
         aside {
-            float: right;
-            margin: 0 1.5%;
-            width: 30%;
+            max-width: 35%;
+            text-align: center;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        li {
+            margin-bottom: 10px;
+            padding: 10px;
+            background-color: #FFFFFF;
+            border: 1px solid #DDD;
+            border-radius: 4px;
+        }
+
+        label {
+            display: inline-block;
+            margin-left: 10px;
+            color: #36454F;
+        }
+
+        button, input[type="submit"] {
+            padding: 5px 10px;
+            background-color: #36454F;
+            color: #FFFFFF;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        button:hover, input[type="submit"]:hover {
+            background-color: #2C3E50;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+
+        td, th {
+            border: 1px solid #DDD;
+            padding: 8px;
+            text-align: left;
+            font-size: 16px;
+            color: #36454F;
+        }
+
+        th {
+            background-color: #36454F;
+            color: #FFFFFF;
+        }
+
+        td {
+            background-color: #FFFFFF;
         }
     </style>
 </head>
@@ -31,27 +115,30 @@
 <header>
     <h1>Select the Artist to add to the List of Performers </h1>
 </header>
-<section>
-    <h2>Select artist:</h2>
-    <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
-    <form th:action="@{'/addArtist'}" method="POST">
-        <ul>
-            <li th:each="artist : ${artists}">
-                <input type="radio" name="artistId" th:value="${artist.getId()}" th:id="${artist.getId()}" required="required">
-                <label th:for="${artist.getId()}" th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></label>
-            </li>
-        </ul>
-        <input type='submit' value='Add artist'>
-    </form>
-</section>
-<aside>
-    <table>
-        <tr>
-            <!-- change to show selected trackId -->
-            <td><b>Track Id</b></td>
-            <td th:text="${trackId}"></td>
-        </tr>
-    </table>
-</aside>
+<div id="container">
+    <section>
+        <h2>Select artist:</h2>
+        <!-- Make changes to this code to dynamically display radio buttons for each artist as in the example -->
+        <form th:action="@{'/addArtist'}" method="POST">
+            <ul>
+                <li th:each="artist : ${artists}">
+                    <input type="radio" name="artistId" th:value="${artist.getId()}" th:id="${artist.getId()}" required="required">
+                    <label th:for="${artist.getId()}" th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></label>
+                </li>
+            </ul>
+            <input type='submit' value='Add artist'>
+        </form>
+    </section>
+    <aside>
+        <table>
+            <tr>
+                <!-- change to show selected trackId -->
+                <td><b>Track Id</b></td>
+                <td th:text="${trackId}"></td>
+            </tr>
+        </table>
+    </aside>
+</div>
+
 </body>
 </html>

@@ -14,11 +14,11 @@ public class ArtistRepository {
 
     public ArtistRepository() {
         artists = Arrays.asList(
-                new Artist(1L, "Jimi", "Hendrix", "Guitarist, Singer"),
-                new Artist(2L, "David", "Bowie", "Singer"),
-                new Artist(3L, "Mark", "Knopfler", "Guitarist"),
-                new Artist(4L, "Julian", "Casablancas", "Singer"),
-                new Artist(5L, "Prince", "", "Singer, Guitarist")
+                new Artist(1L, "Boris", "", "Versatile trio band"),
+                new Artist(2L, "Cocteau", "Twins", "Dreampop band"),
+                new Artist(3L, "The Velvet Underground ", "& Nico", "A superband from the sixties with front man Lou Reed"),
+                new Artist(4L, "my bloody valentine", "", "Mysterious shoegaze band from the nineties"),
+                new Artist(5L, "A Tribe Called Quest", "", "Rap group")
         );
     }
 
