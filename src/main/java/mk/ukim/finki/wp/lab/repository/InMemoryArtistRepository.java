@@ -8,11 +8,11 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ArtistRepository {
+public class InMemoryArtistRepository {
 
     List<Artist> artists;
 
-    public ArtistRepository() {
+    public InMemoryArtistRepository() {
         artists = Arrays.asList(
                 new Artist(1L, "Boris", "", "Versatile trio band"),
                 new Artist(2L, "Cocteau", "Twins", "Dreampop band"),

@@ -27,14 +27,29 @@ public class SongController {
     }
 
     @GetMapping("/songs")
-    public String getSongsPage(@RequestParam(required = false) String error, Model model) {
+    public String getSongsPage(@RequestParam(required = false) String error,
+                               @RequestParam(required = false) Long albumId, Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
 
+        List<Album> albums = this.albumService.findAll();
+        List<Song> songs;
+
+        if (albumId != null) {
+            songs = this.songService.findByAlbum_Id(albumId);
+            model.addAttribute("selectedAlbumId", albumId);
+        } else {
+            songs = this.songService.listSongs();
+        }
+
+        model.addAttribute("songs", songs);
+        model.addAttribute("albums", albums);
         model.addAttribute("bodyContent", "songs");
-        model.addAttribute("songs", this.songService.listSongs());
+
+        //model.addAttribute("bodyContent", "songs");
+        //model.addAttribute("songs", this.songService.listSongs());
         return "listSongs";
     }
 
@@ -54,8 +69,7 @@ public class SongController {
                            @RequestParam int releaseYear,
                            @RequestParam Long albumId) {
 
-        Album album = albumService.findById(albumId);
-        this.songService.addSongToList(new Song(trackId, title, genre, releaseYear, new ArrayList<>(), album));
+        this.songService.create(trackId, title, genre, releaseYear, new ArrayList<>(), albumId);
         return "redirect:/songs";
     }
 
@@ -80,8 +94,8 @@ public class SongController {
                            @RequestParam String genre,
                            @RequestParam int releaseYear,
                            @RequestParam Long albumId) {
-        Album album = albumService.findById(albumId);
-        songService.updateSong(songId, trackId, title, genre, releaseYear, album);
+
+        songService.updateSong(songId, trackId, title, genre, releaseYear, albumId);
         return "redirect:/songs";
     }
 

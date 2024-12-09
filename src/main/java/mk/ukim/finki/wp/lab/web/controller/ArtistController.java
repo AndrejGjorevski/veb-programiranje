@@ -37,7 +37,7 @@ public class ArtistController {
         return "artistsList";
     }
 
-    @PostMapping("/addArtist")
+    /*@PostMapping("/addArtist")
     public String addArtistToSong(@RequestParam Long artistId, HttpSession session) {
         String trackId = (String) session.getAttribute("trackId");
         Song song = songService.findByTrackId(trackId);
@@ -45,5 +45,5 @@ public class ArtistController {
         songService.addArtistToSong(artist.get(), song);
 
         return "redirect:/songDetails";
-    }
+    }*/
 }

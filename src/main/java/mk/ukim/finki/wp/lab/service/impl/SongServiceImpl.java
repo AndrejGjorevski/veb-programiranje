@@ -3,10 +3,13 @@ package mk.ukim.finki.wp.lab.service.impl;
 import mk.ukim.finki.wp.lab.model.Album;
 import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
-import mk.ukim.finki.wp.lab.repository.SongRepository;
+import mk.ukim.finki.wp.lab.repository.InMemorySongRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.AlbumRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.SongRepository;
 import mk.ukim.finki.wp.lab.service.SongService;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,50 +17,60 @@ import java.util.Optional;
 public class SongServiceImpl implements SongService {
 
     private final SongRepository songs;
+    private final AlbumRepository albums;
 
-    public SongServiceImpl(SongRepository songs) {
+    public SongServiceImpl(SongRepository songs, AlbumRepository albums) {
         this.songs = songs;
+        this.albums = albums;
     }
 
+
+    @Override
+    public List<Song> findByAlbum_Id(long albumId) {
+        return songs.findByAlbum_Id(albumId);
+    }
 
     @Override
     public List<Song> listSongs() {
         return songs.findAll();
     }
 
-    @Override
+    /*@Override
     public Artist addArtistToSong(Artist artist, Song song) {
         return songs.addArtistToSong(artist, song);
-    }
+    }*/
 
-    @Override
+    /*@Override
     public Song findByTrackId(String trackId) {
         return songs.findByTrackId(trackId);
+    }*/
+
+    @Override
+    public Song create(String trackId, String title, String genre, int releaseYear, List<Artist> artists, Long albumId) {
+        Album album = albums.findById(albumId).get();
+        Song song = new Song(trackId, title, genre, releaseYear, artists, album);
+        return songs.save(song);
     }
 
     @Override
-    public void addSongToList(Song song) {
-        songs.addSongToList(song);
-    }
-
-    @Override
-    public void updateSong(Long songId, String trackId, String title, String genre, int releaseYear, Album album) {
-        Song song = songs.findBySongId(songId).get();
+    public Song updateSong(Long songId, String trackId, String title, String genre, int releaseYear, Long albumId) {
+        Album album = albums.findById(albumId).get();
+        Song song = songs.findById(songId).get();
         song.setTitle(title);
         song.setGenre(genre);
         song.setReleaseYear(releaseYear);
         song.setAlbum(album);
-        songs.updateSong(song);
+        return songs.save(song);
     }
 
     @Override
     public Optional<Song> findBySongId(Long songId) {
-        return songs.findBySongId(songId);
+        return songs.findById(songId);
     }
 
     @Override
     public void deleteSong(Long songId) {
-        songs.deleteSong(songId);
+        songs.deleteById(songId);
     }
 
 

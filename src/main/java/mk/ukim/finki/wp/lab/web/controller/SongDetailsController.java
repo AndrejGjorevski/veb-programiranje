@@ -21,7 +21,7 @@ public class SongDetailsController {
         this.songService = songService;
     }
 
-    @GetMapping("/songDetails")
+    /*@GetMapping("/songDetails")
     public String getSongDetailsPage(HttpSession session, String error, Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
@@ -33,5 +33,5 @@ public class SongDetailsController {
         model.addAttribute("song", song);
         return "songDetails";
 
-    }
+    }*/
 }
