@@ -30,7 +30,7 @@ public class ArtistController {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
-        String trackId = (String) session.getAttribute("trackId");
+        String trackId = String.valueOf(session.getAttribute("trackId"));
 
         model.addAttribute("trackId", trackId);
         model.addAttribute("artists", this.artistService.findAll());
@@ -39,7 +39,7 @@ public class ArtistController {
 
     @PostMapping("/addArtist")
     public String addArtistToSong(@RequestParam Long artistId, HttpSession session) {
-        Long trackId = Long.valueOf((String) session.getAttribute("trackId"));
+        Long trackId = (Long) session.getAttribute("trackId");
         Song song = songService.findBySongId(trackId).get();
         Optional<Artist> artist = artistService.findById(artistId);
         songService.addArtistToSong(artist.get(), song);

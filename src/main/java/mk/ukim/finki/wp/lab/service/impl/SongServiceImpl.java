@@ -48,6 +48,14 @@ public class SongServiceImpl implements SongService {
     }
 
     @Override
+    public void deleteArtistFromSong(Artist artist, Song song) {
+        song.getPerformers().remove(artist);
+        artist.getSongs().remove(song);
+        songs.save(song);
+        artists.save(artist);
+    }
+
+    @Override
     public Song create(String trackId, String title, String genre, int releaseYear, List<Artist> artists, Long albumId) {
         Album album = albums.findById(albumId).get();
         Song song = new Song(trackId, title, genre, releaseYear, artists, album);

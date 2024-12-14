@@ -106,7 +106,7 @@ public class SongController {
     }
 
     @PostMapping("/submit")
-    public String addTrackIdToSession(@RequestParam String trackId, HttpSession session) {
+    public String addTrackIdToSession(@RequestParam Long trackId, HttpSession session) {
         session.setAttribute("trackId", trackId);
         return "redirect:/artists";
     }

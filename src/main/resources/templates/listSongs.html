@@ -85,7 +85,7 @@
         <form th:action="@{'/submit'}" th:method="POST">
             <ul>
                 <li th:each="song : ${songs}">
-                    <input type="radio" name="trackId" th:value="${song.getTrackId()}" th:id="${song.getId()}" required>
+                    <input type="radio" name="trackId" th:value="${song.getId()}" th:id="${song.getId()}" required>
                     <label th:for="${song.getId()}" th:text="'Name: ' + ${song.getTitle()}
                 + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' +
                 ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">

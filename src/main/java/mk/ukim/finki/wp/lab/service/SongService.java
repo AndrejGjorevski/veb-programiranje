@@ -15,7 +15,7 @@ public interface SongService {
 
     Artist addArtistToSong(Artist artist, Song song);
 
-    //Song findByTrackId(String trackId);
+    void deleteArtistFromSong(Artist artist, Song song);
 
     Song create(String trackId, String title, String genre, int releaseYear, List<Artist> artists, Long albumId);
 

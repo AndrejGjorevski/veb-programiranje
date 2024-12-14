@@ -59,7 +59,12 @@
         <h2 th:text="'Release Year: ' + ${song.getReleaseYear()}"></h2>
         <h2>Performers:</h2>
         <ul>
-            <li th:each="artist : ${song.getPerformers()}" th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></li>
+            <li th:each="artist : ${song.getPerformers()}">
+                <span th:text="${artist.getFirstName()} + ' ' + ${artist.getLastName()}"></span>
+                <form th:action="@{'/songs/' + ${song.id} + '/artists/' + ${artist.id}}" method="POST" style="display: inline; float: right;">
+                    <button>Remove Artist</button>
+                </form>
+            </li>
         </ul>
     </section>
     <section>
