@@ -13,7 +13,7 @@ public interface SongService {
 
     List<Song> listSongs();
 
-    //Artist addArtistToSong(Artist artist, Song song);
+    Artist addArtistToSong(Artist artist, Song song);
 
     //Song findByTrackId(String trackId);
 

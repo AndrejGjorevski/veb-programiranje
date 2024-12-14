@@ -21,17 +21,17 @@ public class SongDetailsController {
         this.songService = songService;
     }
 
-    /*@GetMapping("/songDetails")
+    @GetMapping("/songDetails")
     public String getSongDetailsPage(HttpSession session, String error, Model model) {
         if (error != null && !error.isEmpty()) {
             model.addAttribute("hasError", true);
             model.addAttribute("error", error);
         }
 
-        String trackId = (String) session.getAttribute("trackId");
-        Song song = songService.findByTrackId(trackId);
+        Long trackId =  Long.valueOf((String) session.getAttribute("trackId"));
+        Song song = songService.findBySongId(trackId).get();
         model.addAttribute("song", song);
         return "songDetails";
 
-    }*/
+    }
 }

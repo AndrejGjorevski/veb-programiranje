@@ -7,7 +7,7 @@ import java.util.Optional;
 
 public interface ArtistService {
 
-    List<Artist> listArtists();
+    List<Artist> findAll();
 
-    Optional<Artist> findArtistById(Long id);
+    Optional<Artist> findById(Long id);
 }

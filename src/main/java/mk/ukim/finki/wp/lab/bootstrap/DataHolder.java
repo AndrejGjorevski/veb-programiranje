@@ -2,8 +2,10 @@ package mk.ukim.finki.wp.lab.bootstrap;
 
 import jakarta.annotation.PostConstruct;
 import mk.ukim.finki.wp.lab.model.Album;
+import mk.ukim.finki.wp.lab.model.Artist;
 import mk.ukim.finki.wp.lab.model.Song;
 import mk.ukim.finki.wp.lab.repository.jpa.AlbumRepository;
+import mk.ukim.finki.wp.lab.repository.jpa.ArtistRepository;
 import mk.ukim.finki.wp.lab.repository.jpa.SongRepository;
 import org.springframework.stereotype.Component;
 
@@ -15,13 +17,16 @@ public class DataHolder {
 
     public static List<Song> songs = null;
     public static List<Album> albums = null;
+    public static List<Artist> artists = null;
 
     private final SongRepository songRepository;
     private final AlbumRepository albumRepository;
+    private final ArtistRepository artistRepository;
 
-    public DataHolder(SongRepository songRepository, AlbumRepository albumRepository) {
+    public DataHolder(SongRepository songRepository, AlbumRepository albumRepository, ArtistRepository artistRepository) {
         this.songRepository = songRepository;
         this.albumRepository = albumRepository;
+        this.artistRepository = artistRepository;
     }
 
     @PostConstruct
@@ -44,6 +49,16 @@ public class DataHolder {
             songs.add(new Song("4", "sometimes", "Shoegaze", 1991, new ArrayList<>(), albums.get(3)));
             songs.add(new Song("5", "Jazz(We've Got It)", "Rap", 1991, new ArrayList<>(), albums.get(4)));
             songRepository.saveAll(songs);
+        }
+
+        artists = new ArrayList<>();
+        if (this.artistRepository.count() == 0) {
+            artists.add(new Artist("Boris", "", "Versatile trio band"));
+            artists.add(new Artist("Cocteau", "Twins", "Dreampop band"));
+            artists.add(new Artist("The Velvet Underground ", "& Nico", "A band from the sixties with front man Lou Reed"));
+            artists.add(new Artist("my bloody valentine", "", "Mysterious shoegaze band from the nineties"));
+            artists.add(new Artist("A Tribe Called Quest", "", "Rap group"));
+            artistRepository.saveAll(artists);
         }
     }
 }

@@ -23,7 +23,13 @@ public class Song {
     private String title;
     private String genre;
     private int releaseYear;
-    //private List<Artist> performers;
+    @ManyToMany
+    @JoinTable(
+            name = "artist_song",
+            joinColumns = @JoinColumn(name = "song_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "artist_id", referencedColumnName = "id")
+    )
+    private List<Artist> performers;
     @ManyToOne
     @JoinColumn(name = "album_id", referencedColumnName = "id")
     private Album album;
@@ -33,7 +39,6 @@ public class Song {
         this.title = title;
         this.genre = genre;
         this.releaseYear = releaseYear;
-        //this.performers = performers;
         this.album = album;
         this.id = ++ID_CNT;
     }

@@ -33,17 +33,17 @@ public class ArtistController {
         String trackId = (String) session.getAttribute("trackId");
 
         model.addAttribute("trackId", trackId);
-        model.addAttribute("artists", this.artistService.listArtists());
+        model.addAttribute("artists", this.artistService.findAll());
         return "artistsList";
     }
 
-    /*@PostMapping("/addArtist")
+    @PostMapping("/addArtist")
     public String addArtistToSong(@RequestParam Long artistId, HttpSession session) {
-        String trackId = (String) session.getAttribute("trackId");
-        Song song = songService.findByTrackId(trackId);
-        Optional<Artist> artist = artistService.findArtistById(artistId);
+        Long trackId = Long.valueOf((String) session.getAttribute("trackId"));
+        Song song = songService.findBySongId(trackId).get();
+        Optional<Artist> artist = artistService.findById(artistId);
         songService.addArtistToSong(artist.get(), song);
 
         return "redirect:/songDetails";
-    }*/
+    }
 }

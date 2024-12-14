@@ -14,11 +14,11 @@ public class InMemoryArtistRepository {
 
     public InMemoryArtistRepository() {
         artists = Arrays.asList(
-                new Artist(1L, "Boris", "", "Versatile trio band"),
-                new Artist(2L, "Cocteau", "Twins", "Dreampop band"),
-                new Artist(3L, "The Velvet Underground ", "& Nico", "A superband from the sixties with front man Lou Reed"),
-                new Artist(4L, "my bloody valentine", "", "Mysterious shoegaze band from the nineties"),
-                new Artist(5L, "A Tribe Called Quest", "", "Rap group")
+                new Artist("Boris", "", "Versatile trio band"),
+                new Artist("Cocteau", "Twins", "Dreampop band"),
+                new Artist("The Velvet Underground ", "& Nico", "A superband from the sixties with front man Lou Reed"),
+                new Artist("my bloody valentine", "", "Mysterious shoegaze band from the nineties"),
+                new Artist("A Tribe Called Quest", "", "Rap group")
         );
     }
 
