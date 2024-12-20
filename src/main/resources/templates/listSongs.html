@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:th="http://www.thymeleaf.org">
+      xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="utf-8">
     <title>Songs Homepage - Welcome to My Music Store</title>
@@ -90,15 +90,15 @@
                 + ', Genre: ' + ${song.getGenre()} + ', Release Year: ' +
                 ${song.getReleaseYear()} + ', Album: ' + ${song.getAlbum().getName()}">
                     </label>
-                    <div style="display: inline;">
+                    <div style="display: inline;" sec:authorize="hasRole('ADMIN')">
                         <button type="submit" th:formaction="@{'/edit-form/{id}' (id=${song.getId()})}" th:formmethod="GET">Edit Song</button>
                         <button type="submit" th:formaction="@{'/delete/{id}' (id=${song.getId()})}" th:formmethod="POST">Delete Song</button>
                     </div>
                 </li>
             </ul>
-            <button type="submit">Submit</button>
+            <button type="submit" sec:authorize="hasRole('ADMIN')">Submit</button>
         </form>
-        <a th:href="@{'/add-form'}" style="margin-top: 5px"><button>Add Song</button></a>
+        <span sec:authorize="hasRole('ADMIN')"><a th:href="@{'/add-form'}" style="margin-top: 5px"><button>Add Song</button></a></span>
     </main>
 
     <form th:action="@{/songs}" method="GET">
@@ -113,6 +113,9 @@
         </select>
         <button type="submit">Filter</button>
     </form>
+
+    <a th:href="@{'/login'}"><button>Login</button></a>
+    <a th:href="@{'/logout'}" sec:authorize="hasRole('ADMIN')"><button>Logout</button></a>
 </div>
 
 </body>
